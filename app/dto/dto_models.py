@@ -126,8 +126,16 @@ class ReservationOrderDTO:
             'start_date': self.start_date,
             'end_date': self.end_date,
             'apartment': self.apartment.to_dict(),
-            'renter': self.renter.to_dict()
+            'renter':
+            {
+                'id': self.renter.id,
+                'first_name': self.renter.first_name,
+                'last_name': self.renter.last_name,
+                'email': self.renter.email,
+                'phone': self.renter.phone
+            }
         }
+
 
 class ReviewsDTO:
     def __init__(self, review_id, description, point, renter_id, apartment, reservation_order):
@@ -143,9 +151,31 @@ class ReviewsDTO:
             'review_id': self.review_id,
             'description': self.description,
             'point': self.point,
-            'renter': self.renter.to_dict(),
-            'apartment': self.apartment.to_dict(),
-            'reservation_order': self.reservation_order.to_dict()
+            'renter':
+            {
+                'id': self.renter.id,
+                'first_name': self.renter.first_name,
+                'last_name': self.renter.last_name,
+                'email': self.renter.email,
+                'phone': self.renter.phone
+            }
+        ,
+            'apartment': self.apartment.to_dict(), # вдалось без костиля лишити
+            'reservation_order':
+                {
+                'id': self.reservation_order.id,
+                'is_confirmed': self.reservation_order.is_confirmed,
+                'start_date': self.reservation_order.start_date,
+                'end_date': self.reservation_order.end_date,
+                'apartment': self.apartment.to_dict(), # тут теж
+                'renter': { # тут треба було ще це закодити, виглядає погано, але працює
+                    'id': self.renter.id,
+                    'first_name': self.renter.first_name,
+                    'last_name': self.renter.last_name,
+                    'email': self.renter.email,
+                    'phone': self.renter.phone
+                }
+            }
         }
 
 
@@ -166,7 +196,14 @@ class TransactionDTO:
             'amount': self.amount,
             'reservation_order': self.reservation_order.to_dict(),
             'apartment': self.apartment.to_dict(),
-            'renter': self.renter.to_dict()
+            'renter':
+            {
+                'id': self.renter.id,
+                'first_name': self.renter.first_name,
+                'last_name': self.renter.last_name,
+                'email': self.renter.email,
+                'phone': self.renter.phone
+            }
         }
 
 

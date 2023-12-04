@@ -1,7 +1,8 @@
-from flask import Blueprint, jsonify, request
+from flask import jsonify, request
 
 from app import app
 from app.services.amenities_service import AmenitiesService
+
 
 @app.route('/amenities', methods=['POST'])
 def create_amenities():

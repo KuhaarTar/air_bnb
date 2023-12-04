@@ -11,6 +11,16 @@ class ApartmentHasAmenitiesDAO:
         return apartment_has_amenities
 
     @staticmethod
+    def remove_amenities_by_id(amenities_id):
+        apartment_has_amenities_list = ApartmentHasAmenities.query.filter_by(amenities_id=amenities_id).all()
+
+        for apartment_has_amenities in apartment_has_amenities_list:
+            db.session.delete(apartment_has_amenities)
+            db.session.commit()
+
+        return apartment_has_amenities_list
+
+    @staticmethod
     def get_amenities_for_apartment(apartment_id):
         return ApartmentHasAmenities.query.filter_by(apartment_id=apartment_id).all()
 

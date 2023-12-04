@@ -1,5 +1,7 @@
 from flask import jsonify, request
 from app import app
+from app.models import Apartment, ApartmentPhoto, Reviews
+from app.services.apartment_photo_service import ApartmentPhotoService
 from app.services.apartmnet_service import ApartmentService
 
 
@@ -35,6 +37,12 @@ def create_apartment():
     apartment = ApartmentService.create_apartment(area_of_territory, enable_to_reserve, cost_per_hour,
                                                   lessor_id, address_id, rating_id)
     return jsonify(apartment.to_dict()), 201
+
+
+@app.route('/apartments/<int:apartment_id>/reviews', methods=['GET'])
+def get_apartment_reviews(apartment_id):
+    reviews = Reviews.query.filter_by(apartment_id=apartment_id)
+    return jsonify([review.to_dict() for review in reviews])
 
 
 @app.route('/apartments/<int:apartment_id>', methods=['PUT'])

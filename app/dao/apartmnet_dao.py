@@ -50,7 +50,7 @@ class ApartmentDAO:
 
     @staticmethod
     def delete_apartment(apartment_id):
-        apartment = Apartment.get_apartment_by_id(apartment_id)
+        apartment = ApartmentDAO.get_apartment_by_id(apartment_id)
 
         if apartment:
             db.session.delete(apartment)

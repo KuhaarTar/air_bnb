@@ -13,7 +13,7 @@ class ReservationOrder(db.Model):
     apartment = relationship("Apartment", back_populates="reservation_orders")
     renter = relationship("Renter", back_populates="reservation_orders")
     reviews = relationship("Reviews", back_populates="reservation_order")
-
+    
     def to_dict(self):
         return {
             'id': self.id,
@@ -24,4 +24,3 @@ class ReservationOrder(db.Model):
             'renter': self.renter.to_dict() if self.renter else None,
             'reviews': [review.to_dict() for review in self.reviews] if self.reviews else [],
         }
-

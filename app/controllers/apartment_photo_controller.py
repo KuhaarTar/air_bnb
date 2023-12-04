@@ -1,4 +1,6 @@
 from flask import jsonify, request
+
+from app.models import Apartment, ApartmentPhoto
 from app.services.apartment_photo_service import ApartmentPhotoService
 from app import app
 
@@ -30,6 +32,12 @@ def get_apartment_photo_by_id(photo_id):
         return jsonify(photo_dto.to_dict())
     else:
         return jsonify({'error': 'Apartment Photo not found'}), 404
+
+
+@app.route('/apartment/<int:apartment_id>/photos', methods=['GET'])
+def get_apartment_photos_new(apartment_id):
+    photos = ApartmentPhoto.query.filter_by(apartment_id=apartment_id).all()
+    return jsonify([photo.to_dict() for photo in photos])
 
 
 @app.route('/apartment-photos/<int:photo_id>', methods=['PUT'])

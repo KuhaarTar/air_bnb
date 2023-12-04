@@ -1,4 +1,5 @@
 from app.dao.amenities_dao import AmenitiesDAO
+from app.dao.apartment_has_amenities_dao import ApartmentHasAmenitiesDAO
 from app.dto import AmenitiesDTO
 
 
@@ -33,6 +34,7 @@ class AmenitiesService:
 
     @staticmethod
     def delete_amenities(amenities_id):
+        ApartmentHasAmenitiesDAO.remove_amenities_by_id(amenities_id)
         deleted_amenities = AmenitiesDAO.delete_amenities(amenities_id)
         if deleted_amenities:
             return AmenitiesDTO(deleted_amenities.amenities_id, deleted_amenities.name,

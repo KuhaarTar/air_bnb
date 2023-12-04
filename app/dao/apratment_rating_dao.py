@@ -24,7 +24,11 @@ class ApartmentRatingDAO:
         return ApartmentRating.query.all()
 
     @staticmethod
-    def update_apartment_rating(rating_id, count_of_reviews=None, avg_point=None, time_modified=None):
+    def get_apartment_rating_by_id(id):
+        return ApartmentRating.query.get(id)
+
+    @staticmethod
+    def update_apartment_rating(rating_id, count_of_reviews=None, avg_point=None,  time_created =None,time_modified=None):
         apartment_rating = ApartmentRatingDAO.get_apartment_rating(rating_id)
 
         if apartment_rating:
@@ -34,6 +38,8 @@ class ApartmentRatingDAO:
                 apartment_rating.avg_point = avg_point
             if time_modified is not None:
                 apartment_rating.time_modified = time_modified
+            if time_created is not None:
+                apartment_rating.time_created = time_created
 
             db.session.commit()
 

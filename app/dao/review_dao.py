@@ -25,6 +25,10 @@ class ReviewsDAO:
         return Reviews.query.get(review_id)
 
     @staticmethod
+    def get_all_by_renter(renter_id):
+        return Reviews.query.all().filter(Reviews.renter == renter_id)
+
+    @staticmethod
     def update_review(review_id, description=None, point=None, renter=None, apartment=None, reservation_order=None):
         review = ReviewsDAO.get_review_by_id(review_id)
 

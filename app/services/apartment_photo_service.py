@@ -33,6 +33,12 @@ class ApartmentPhotoService:
             return None
 
     @staticmethod
+    def get_apartment_photos_new(apartment_id):
+        photos_list = ApartmentPhotoDAO.get_apartment_photos_new(apartment_id)
+        return [ApartmentPhotoDTO(photo.id, photo.photo_url, photo.description, photo.apartment_id)
+                for photo in photos_list]
+
+    @staticmethod
     def delete_apartment_photo(photo_id):
         deleted_photo = ApartmentPhotoDAO.delete_apartment_photo(photo_id)
         if deleted_photo:

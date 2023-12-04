@@ -1,4 +1,6 @@
 from flask import jsonify, request
+
+from app.dao.review_dao import ReviewsDAO
 from app.services.reviews_service import ReviewsService
 from app import app
 
@@ -24,7 +26,6 @@ def create_review():
 def get_reviews():
     reviews_list = ReviewsService.get_reviews()
     return jsonify([review.to_dict() for review in reviews_list])
-
 
 @app.route('/reviews/<int:review_id>', methods=['GET'])
 def get_review_by_id(review_id):
